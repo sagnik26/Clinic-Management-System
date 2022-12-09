@@ -44,3 +44,18 @@
 20221121	11:56:20	bac24d1b-b90c-4d78-8f91-c43b0ff8278f	MongoServerError : E11000 duplicate key error collection: ClinicData.patients index: doctor_1 dup key: { doctor: null } 	 POST	/patients	undefined
 20221121	11:58:23	6a9d54a9-1354-445c-9bd9-5fea0d12c86a	MongoServerError : E11000 duplicate key error collection: ClinicData.patients index: doctor_1 dup key: { doctor: null } 	 POST	/patients	undefined
 20221121	12:29:57	07738b46-24e2-4571-af08-a6fb5692229b	ReferenceError : pToken is not defined 	 POST	/patients	undefined
+20221127	01:14:17	5dc1d4e8-05df-4126-83c3-32bb3ee471ba	Error : Not allowed by cors 	 GET	/users	http://localhost:3001
+20221201	23:55:29	ca0e04d0-1612-4d99-af9b-e45d659d36ee	MongoServerError : E11000 duplicate key error collection: 6372941d0ce714465d94af1d_ClinicData.patients index: mobileNumber_1 dup key: { mobileNumber: 9434017832.0 } 	 PATCH	/patients	http://localhost:3000
+20221201	23:55:47	ad965fce-a34a-426f-899d-d9e0f4d512ab	MongoServerError : E11000 duplicate key error collection: 6372941d0ce714465d94af1d_ClinicData.patients index: mobileNumber_1 dup key: { mobileNumber: 9434017832.0 } 	 PATCH	/patients	http://localhost:3000
+20221202	01:28:58	1f3d6fc9-5233-4bd1-86a4-8489920fed69	MongoServerError : E11000 duplicate key error collection: 6372941d0ce714465d94af1d_ClinicData.patients index: mobileNumber_1 dup key: { mobileNumber: 9476107984.0 } 	 PATCH	/patients	undefined
+20221202	01:53:26	4fabcf35-e12c-4439-b56a-95f3c7374345	MongoServerError : E11000 duplicate key error collection: 6372941d0ce714465d94af1d_ClinicData.patients index: mobileNumber_1 dup key: { mobileNumber: 9876543217.0 } 	 PATCH	/patients	undefined
+20221202	01:55:44	49f27974-2804-4244-bc80-689f6cc6958f	MongoServerError : E11000 duplicate key error collection: 6372941d0ce714465d94af1d_ClinicData.patients index: mobileNumber_1 dup key: { mobileNumber: 9876543217.0 } 	 PATCH	/patients	undefined
+20221202	01:56:03	2bb59aba-d41c-4f3a-977f-103da4a16045	MongoServerError : E11000 duplicate key error collection: 6372941d0ce714465d94af1d_ClinicData.patients index: mobileNumber_1 dup key: { mobileNumber: 9876543217.0 } 	 PATCH	/patients	undefined
+20221202	02:08:53	fc31ef45-1262-4352-9c07-aad14f40be41	MongoServerError : db already exists with different case already have: [clinicData] trying to create [ClinicData] 	 POST	/users	undefined
+20221203	12:51:42	ec7eb6ee-cb3e-4cfd-84fd-8981c957908e	SyntaxError : Unexpected token / in JSON at position 191 	 POST	/patients	undefined
+20221203	12:52:01	d1024221-025b-4d05-b84b-5b951af2841b	SyntaxError : Unexpected token / in JSON at position 191 	 POST	/patients	undefined
+20221205	19:35:48	f7715396-f0c3-46bb-88ad-abf7ed5893b4	Too many requests: Too many login requests from this IP, please try again after 1 minute pause	POST	/	http://localhost:3000
+20221205	19:36:04	41a8ad68-d94e-4d3a-95db-b979c7217281	Too many requests: Too many login requests from this IP, please try again after 1 minute pause	POST	/	http://localhost:3000
+20221205	20:16:58	9e2c5308-a958-4fe9-9ca3-973f3186aa77	Too many requests: Too many login requests from this IP, please try again after 1 minute pause	POST	/	http://localhost:3000
+20221205	20:16:58	6c62b08d-94cc-45f3-9112-faafe65ed91e	Too many requests: Too many login requests from this IP, please try again after 1 minute pause	POST	/	http://localhost:3000
+20221205	20:16:58	3883eeb5-8a23-449a-be5d-1be0d4126187	Too many requests: Too many login requests from this IP, please try again after 1 minute pause	POST	/	http://localhost:3000

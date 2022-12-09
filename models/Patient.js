@@ -17,7 +17,6 @@ const patientSchema = new mongoose.Schema({
     },
     mobileNumber: {
         type: Number,
-        unique: true,
         required: true
     },
     deceaseRecordOne: {
@@ -32,10 +31,11 @@ const patientSchema = new mongoose.Schema({
     medicineRecordTwo: {
         type: String
     },
-    doctorID: {
-        type: mongoose.Schema.Types.ObjectId,
+    doctorID: [{
+        type: String,
+        default: 'Kunal',
         required: true
-    }
+    }]
 },
 {
     timestamps: true

@@ -10,7 +10,7 @@ const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbConn')
 
-const PORT = process.env.PORT || 3500
+const PORT = process.env.PORT || 3501
 
 connectDB()
 
@@ -28,8 +28,8 @@ app.use('/', require('./routes/root'))
 
 app.use(express.static(path.join(__dirname, 'uploads')));
 
+app.use('/auth', require('./routes/authRoutes'))
 app.use('/users', require('./routes/userRoutes'))
-
 app.use('/patients', require('./routes/patientRoutes'))
 
 app.all('*', (req, res) => {

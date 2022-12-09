@@ -17,10 +17,10 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
 // @route POST/users
 const createNewUser = asyncHandler(async (req, res) => {
-    const { username, password, roles } = req.body
+    const { name, username, password, roles } = req.body
 
     // confirm data
-    if(!username || !password || !Array.isArray(roles) || !roles.length) {
+    if(!name || !username || !password || !Array.isArray(roles) || !roles.length) {
         return res.status(400).json({
             message: 'All fields are required'
         })
@@ -37,7 +37,7 @@ const createNewUser = asyncHandler(async (req, res) => {
     // Hash password
     const hashedPwd = await bcrypt.hash(password, 10)
 
-    const userObject = { username, "password": hashedPwd, roles }
+    const userObject = { name, username, "password": hashedPwd, roles }
 
     // Create and store new user
     const user = await User.create(userObject)
@@ -58,14 +58,14 @@ const createNewUser = asyncHandler(async (req, res) => {
 
 // @route PATCH/users
 const updateUser = asyncHandler(async (req, res) => {
-    const { id, username, password, roles } = req.body
+    const { id, name, username, password, roles } = req.body
 
     // Confirm data
-    if(!username || !password || !Array.isArray(roles) || !roles.length) {
-        return res.status(400).json({
-            message: 'All fields except password are required'
-        })
-    }
+    // if(!name || !username || !password || !Array.isArray(roles) || !roles.length) {
+    //     return res.status(400).json({
+    //         message: 'All fields except password are required'
+    //     })
+    // }
 
     // check if the id exists
     const user = await User.findById(id).exec()
@@ -82,8 +82,9 @@ const updateUser = asyncHandler(async (req, res) => {
             message: 'Duplicate username'
         })
     }
-
+    
     // Allow updates
+    user.name = name
     user.username = username
     user.roles = roles
 
@@ -91,7 +92,7 @@ const updateUser = asyncHandler(async (req, res) => {
         // hash password
         user.password = await bcrypt.hash(password, 10)
     }
-
+    
     const updatedUser = await user.save()
 
     // send response

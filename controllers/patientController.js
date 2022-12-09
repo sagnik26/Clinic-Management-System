@@ -16,10 +16,10 @@ const getAllPatients = asyncHandler(async (req, res) => {
 
 // @route POST/patients
 const createNewPatient = asyncHandler(async (req, res) => {
-    const { pID, patientName, address, mobileNumber, deceaseRecordOne, medicineRecordOne, deceaseRecordTwo, medicineRecordTwo, doctorID } = req.body
+    const { pID, patientName, address, mobileNumber, deceaseRecordOne, medicineRecordOne, doctorID } = req.body
 
     // confirm data
-    if(!pID || !patientName || !address || !mobileNumber || !deceaseRecordOne || !medicineRecordOne || !doctorID ) {
+    if(!pID || !patientName || !address || !mobileNumber || !deceaseRecordOne || !medicineRecordOne || !Array.isArray(doctorID) || !doctorID.length ) {
         return res.status(400).json({
             message: 'All fields are required'
         })
@@ -33,7 +33,7 @@ const createNewPatient = asyncHandler(async (req, res) => {
         })
     }
 
-    const patientObject = { pID, patientName, address, mobileNumber, deceaseRecordOne, medicineRecordOne, deceaseRecordTwo, medicineRecordTwo, doctorID }
+    const patientObject = { pID, patientName, address, mobileNumber, deceaseRecordOne, medicineRecordOne, doctorID }
 
     // Create and store new patient
     const patient = await Patient.create(patientObject)
@@ -54,10 +54,10 @@ const createNewPatient = asyncHandler(async (req, res) => {
 
 // @route PATCH/patients
 const updatePatient = asyncHandler(async (req, res) => {
-    const { id, pToken, patientName, address, mobileNumber, deceaseRecordOne, medicineRecordOne, deceaseRecordTwo, medicineRecordTwo, doctorID } = req.body
+    const { pToken, id, patientName, address, mobileNumber, deceaseRecordOne, medicineRecordOne, doctorID } = req.body
 
     // Confirm data
-    if(!pToken || !patientName || !address || !mobileNumber || !deceaseRecordOne || !medicineRecordOne || !doctorID) {
+    if( !pToken || !patientName || !address || !mobileNumber || !deceaseRecordOne || !medicineRecordOne || !Array.isArray(doctorID) || !doctorID.length) {
         return res.status(400).json({
             message: 'All fields are required'
         })
@@ -66,6 +66,7 @@ const updatePatient = asyncHandler(async (req, res) => {
     // check if the id exists
     // const patient = await Patient.findById(id).exec()
     const patient = await Patient.findOne({ pToken }).exec()
+    console.log(patient)
 
     if(!patient) {
         return res.status(400).json({ message: 'Patient not found' })
@@ -86,15 +87,13 @@ const updatePatient = asyncHandler(async (req, res) => {
     patient.mobileNumber = mobileNumber
     patient.deceaseRecordOne = deceaseRecordOne
     patient.medicineRecordOne = medicineRecordOne
-    patient.deceaseRecordTwo = deceaseRecordTwo
-    patient.medicineRecordTwo = medicineRecordTwo
     patient.doctorID = doctorID
 
     await patient.save()
 
     // send response
     res.json({
-        message: `${patient.patientName} with token ${patient.pToken} updated`
+        message: `${patient.patientName} with token ${patient.pToken} & id ${patient.id} updated`
     })
 })
 
@@ -106,12 +105,12 @@ const deletePatient = asyncHandler(async (req, res) => {
     // Confirm data
     if(!pToken) {
         return res.status(400).json({
-            message: 'Token number required'
+            message: 'Token required'
         })
     }   
 
     // Check if the user exist to delete
-    const patient = await Patient.findOne({pToken}).exec()
+    const patient = await Patient.findOne({ pToken }).exec()
 
     if(!patient) {
         return res.status(400).json({
@@ -122,7 +121,7 @@ const deletePatient = asyncHandler(async (req, res) => {
     const result = await patient.deleteOne()
 
     const reply = `Username ${result.patientName} with token ${patient.pToken} deleted`
-
+9
     res.json(reply)
 })
 
