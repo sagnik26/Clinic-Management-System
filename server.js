@@ -16,8 +16,10 @@ connectDB()
 
 app.use(logger)
 
-app.use(cors(corsOptions))
-// app.use(cors())
+// app.use(cors(corsOptions))
+app.use(cors({
+    origin: "https://clinictest.onrender.com/"
+}))
 
 // app.options('*', cors(corsOptions));
 // app.use((req,res,next)=>{
