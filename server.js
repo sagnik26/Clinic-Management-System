@@ -18,7 +18,7 @@ app.use(logger)
 
 // app.use(cors(corsOptions))
 app.use(cors({
-    origin: "https://clinictest.onrender.com/"
+    origin: "https://clinictest.onrender.com/login"
 }))
 
 // app.options('*', cors(corsOptions));
