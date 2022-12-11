@@ -16,11 +16,11 @@ connectDB()
 
 app.use(logger)
 
-// app.use(cors(corsOptions))
-app.use(cors({
-    origin: "*"
-}))
+app.use(cors(corsOptions))
 
+// app.use(cors({
+//     origin: "*"
+// }))
 // app.options('*', cors(corsOptions));
 // app.use((req,res,next)=>{
 //     res.setHeader('Access-Control-Allow-Origin', '');
