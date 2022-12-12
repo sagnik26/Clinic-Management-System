@@ -29,7 +29,7 @@ const createNewPatient = asyncHandler(async (req, res) => {
     const duplicate = await Patient.findOne({pID}).lean().exec()
     if(duplicate) {
         return res.status(400).json({
-            message: 'Duplicate ID'
+            message: 'Duplicate Email ID (PID)'
         })
     }
 
@@ -54,10 +54,10 @@ const createNewPatient = asyncHandler(async (req, res) => {
 
 // @route PATCH/patients
 const updatePatient = asyncHandler(async (req, res) => {
-    const { pToken, id, patientName, address, mobileNumber, deceaseRecordOne, medicineRecordOne, doctorID } = req.body
+    const { pToken, pID, id, patientName, address, mobileNumber, deceaseRecordOne, medicineRecordOne, doctorID } = req.body
 
     // Confirm data
-    if( !pToken || !patientName || !address || !mobileNumber || !deceaseRecordOne || !medicineRecordOne || !Array.isArray(doctorID) || !doctorID.length) {
+    if( !pToken || !pID || !patientName || !address || !mobileNumber || !deceaseRecordOne || !medicineRecordOne || !Array.isArray(doctorID) || !doctorID.length) {
         return res.status(400).json({
             message: 'All fields are required'
         })
@@ -72,16 +72,26 @@ const updatePatient = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: 'Patient not found' })
     }
 
-    // check for duplicate
-    const duplicate = await Patient.findOne({ pToken }).lean().exec()
+    // check for duplicate id
+    const duplicateID = await Patient.findOne({ pToken }).lean().exec()
 
-    if(duplicate && duplicate?._id.toString() !== id) {
+    if(duplicateID && duplicateID?._id.toString() !== id) {
         return res.status(409).json({
             message: 'Duplicate ID'
         })
     }
+
+     // check for duplicate Email
+     const duplicateEmail = await Patient.findOne({ pID }).lean().exec()
+
+     if(duplicateEmail && duplicateEmail?._id.toString() !== id) {
+         return res.status(409).json({
+             message: 'Duplicate Email ID'
+         })
+     }
     
     // Allow updates
+    patient.pID = pID
     patient.patientName = patientName
     patient.address = address
     patient.mobileNumber = mobileNumber

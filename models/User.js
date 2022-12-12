@@ -5,6 +5,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    mobileNumber: {
+        type: Number,
+        required: true
+    },
     username: {
         type: String,
         required: true,

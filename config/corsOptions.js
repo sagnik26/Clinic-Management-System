@@ -11,7 +11,7 @@ const corsOptions = {
     // },
     // credentials: true,
     // optionsSuccessStatus: 200
-
+    
     origin: function(origin, callback){
         return callback(null, true);
       },

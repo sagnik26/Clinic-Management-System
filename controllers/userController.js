@@ -17,10 +17,10 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
 // @route POST/users
 const createNewUser = asyncHandler(async (req, res) => {
-    const { name, username, password, roles } = req.body
+    const { name, mobileNumber, username, password, roles } = req.body
 
     // confirm data
-    if(!name || !username || !password || !Array.isArray(roles) || !roles.length) {
+    if(!name || !mobileNumber || !username || !password || !Array.isArray(roles) || !roles.length) {
         return res.status(400).json({
             message: 'All fields are required'
         })
@@ -30,14 +30,14 @@ const createNewUser = asyncHandler(async (req, res) => {
     const duplicate = await User.findOne({username}).lean().exec()
     if(duplicate) {
         return res.status(400).json({
-            message: 'Duplicate username'
+            message: 'Duplicate Email ID, Email already exists'
         })
     }
 
     // Hash password
     const hashedPwd = await bcrypt.hash(password, 10)
 
-    const userObject = { name, username, "password": hashedPwd, roles }
+    const userObject = { name, mobileNumber, username, "password": hashedPwd, roles }
 
     // Create and store new user
     const user = await User.create(userObject)
@@ -58,14 +58,7 @@ const createNewUser = asyncHandler(async (req, res) => {
 
 // @route PATCH/users
 const updateUser = asyncHandler(async (req, res) => {
-    const { id, name, username, password, roles } = req.body
-
-    // Confirm data
-    // if(!name || !username || !password || !Array.isArray(roles) || !roles.length) {
-    //     return res.status(400).json({
-    //         message: 'All fields except password are required'
-    //     })
-    // }
+    const { id, name, mobileNumber, username, password, roles } = req.body
 
     // check if the id exists
     const user = await User.findById(id).exec()
@@ -79,12 +72,13 @@ const updateUser = asyncHandler(async (req, res) => {
 
     if(duplicate && duplicate?._id.toString() !== id) {
         return res.status(409).json({
-            message: 'Duplicate username'
+            message: 'Duplicate Email ID'
         })
     }
     
     // Allow updates
     user.name = name
+    user.mobileNumber = mobileNumber
     user.username = username
     user.roles = roles
 

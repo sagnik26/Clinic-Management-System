@@ -3,7 +3,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const patientSchema = new mongoose.Schema({
     pID: {
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },

@@ -59,3 +59,10 @@
 20221205	20:16:58	9e2c5308-a958-4fe9-9ca3-973f3186aa77	Too many requests: Too many login requests from this IP, please try again after 1 minute pause	POST	/	http://localhost:3000
 20221205	20:16:58	6c62b08d-94cc-45f3-9112-faafe65ed91e	Too many requests: Too many login requests from this IP, please try again after 1 minute pause	POST	/	http://localhost:3000
 20221205	20:16:58	3883eeb5-8a23-449a-be5d-1be0d4126187	Too many requests: Too many login requests from this IP, please try again after 1 minute pause	POST	/	http://localhost:3000
+20221211	15:46:45	d0da3039-ac19-441c-ac63-6b3363d17c23	MongoServerError : E11000 duplicate key error collection: clinicData.patients index: pID_1 dup key: { pID: null } 	 POST	/patients	undefined
+20221211	16:59:42	e9cff2ad-232d-47fd-bc30-8b8af3f2ecdc	ValidationError : Patient validation failed: emailID: Path `emailID` is required. 	 POST	/patients	http://localhost:3000
+20221211	17:04:06	438d50a1-fcc9-4614-83ce-e9550c6f426f	ValidationError : Patient validation failed: emailID: Path `emailID` is required. 	 POST	/patients	http://localhost:3000
+20221211	17:33:23	f4a479df-f453-4cbb-871f-074e5020b068	ValidationError : Patient validation failed: emailID: Path `emailID` is required. 	 POST	/patients	undefined
+20221211	17:37:00	0c5a7575-0f27-453a-8d33-be05e7a1ef68	MongoServerError : E11000 duplicate key error collection: clinicData.patients index: emailID_1 dup key: { emailID: null } 	 POST	/patients	http://localhost:3000
+20221211	17:37:52	b6f350b2-ad00-42a2-bb17-3a50a8c61922	MongoServerError : E11000 duplicate key error collection: clinicData.patients index: emailID_1 dup key: { emailID: null } 	 POST	/patients	http://localhost:3000
+20221212	01:28:56	23750d18-744c-44df-924e-a77e604f28e5	MongoServerError : E11000 duplicate key error collection: 6372941d0ce714465d94af1d_clinicData.patients index: pID_1 dup key: { pID: "srij214@gmail.com" } 	 PATCH	/patients	http://localhost:3000
